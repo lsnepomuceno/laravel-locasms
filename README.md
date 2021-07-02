@@ -4,6 +4,9 @@ Require this package in your composer.json and update composer. This will downlo
 ```Shell
 composer require lsnepomuceno/laravel-locasms
 ```
+# Sign up before you start
+Register at [LocaSMS](http://locasms.com.br) to obtain login and password.
+
 # Usage
 ```PHP
 <?php
