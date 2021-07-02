@@ -1,0 +1,51 @@
+{
+	"name": "lsnepomuceno/laravel-locasms",
+	"description": "SMS integration with LocaSMS service.",
+	"license": "MIT",
+	"type": "library",
+	"homepage": "https://github.com/lsnepomuceno/laravel-locasms",
+	"support": {
+		"issues": "https://github.com/lsnepomuceno/laravel-locasms/issues",
+		"source": "https://github.com/lsnepomuceno/laravel-locasms"
+	},
+	"keywords": [
+		"sms service",
+		"sms",
+		"laravel",
+		"loca",
+		"loca sms"
+	],
+	"require": {
+		"php": "^7.4 || ^8.0",
+		"ext-json": "*",
+		"ext-mbstring": "*",
+		"illuminate/support": "^8.0",
+		"illuminate/http": "^8.0"
+	},
+	"minimum-stability": "dev",
+	"require-dev": {
+		"phpunit/phpunit": "9.5.x-dev",
+		"orchestra/testbench": "6.x-dev",
+		"nunomaduro/collision": "dev-stable"
+	},
+	"autoload": {
+		"psr-4": {
+			"LSNepomuceno\\LaravelLocasms\\": "src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"LSNepomuceno\\LaravelLocasms\\Tests\\": "tests"
+		}
+	},
+	"authors": [
+		{
+			"name": "Lucas Nepomuceno",
+			"email": "lsn.nepomuceno@gmail.com"
+		}
+	],
+	"scripts": {
+		"test": "vendor/bin/phpunit",
+		"test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+	}
+}
