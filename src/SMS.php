@@ -34,6 +34,38 @@ class SMS extends Http
   }
 
   /**
+   * cleanNumbers - Format numbers to Brazilian format without country code
+   *
+   * @param  array $numbers
+   * @return array
+   */
+  private function cleanNumbers(array $numbers): array
+  {
+    return array_map(function ($number) {
+      $number = preg_replace("/\D/", '', $number);
+      return substr($number, -11);
+    }, $numbers);
+  }
+
+  /**
+   * performGet - Prepare get
+   *
+   * @throws \Exception
+   *
+   * @return \Illuminate\Http\Client\Response
+   */
+  private function performGet(): Response
+  {
+    $response = $this->client->get('', $this->params);
+
+    if (!$response->body()['status']) {
+      throw new \Exception($response->body()['msg']);
+    }
+
+    return $response;
+  }
+
+  /**
    * send - Send sms mesages from defined numbers
    *
    * @param  array $numbers
@@ -57,20 +89,22 @@ class SMS extends Http
       'numbers' => join(',', $this->cleanNumbers($numbers))
     ];
 
-    return $this->client->get('', $this->params);
+    return $this->performGet();
   }
 
   /**
-   * cleanNumbers - Format numbers to Brazilian format without country code
+   * getBalance - Receive sms balance for account
    *
-   * @param  array $numbers
-   * @return array
+   * @return \Illuminate\Http\Client\Response
    */
-  private function cleanNumbers(array $numbers): array
+  public function getBalance(): Response
   {
-    return array_map(function ($number) {
-      $number = preg_replace("/\D/", '', $number);
-      return substr($number, -11);
-    }, $numbers);
+    $this->params = [
+      'action'  => 'getbalance',
+      'lgn'     => $this->login,
+      'pwd'     => $this->pass
+    ];
+
+    return $this->performGet();
   }
 }
